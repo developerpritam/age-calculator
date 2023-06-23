@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            /* height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; */
+            /* font-family: Arial, Helvetica, sans-serif; */
+            /* background-color: #333;
+            color: #fff; */
+        }
+
+        /* ============= todo list app css ============ */
+        /* .hidden {
+            display: none;
+        } */
+        /* ============= todo list app css ============ */
+
+        /* ============== age cal css ============== */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #7d56f3;
+        }
+
+        .container {
+            width: min(40%, 28.12em);
+            /* position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%; */
+            display: grid;
+            place-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .container * {
+            border: none;
+            outline: none;
+        }
+
+        .input-wrapper {
+            background-color: #fff;
+            padding: 1.87em 1.5em;
+            border-radius: .5em;
+            box-shadow: 0 0.93em 1.25em rgba(0, 0, 0, 0.3);
+            margin-bottom: 3.12em;
+            display: grid;
+            grid-template-columns: 9fr 3fr;
+            gap: 1em;
+        }
+
+        input,
+        button {
+            font-weight: 500;
+            border-radius: 0.31em;
+        }
+
+        input {
+            padding: 1.2em 1.25em;
+            font-size: .95em;
+            background: #eeeeff;
+            color: #080808;
+        }
+
+        button {
+            color: #fff;
+            background: #7d56f3;
+            padding: 0 12px;
+        }
+
+        .output-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .output-wrapper div {
+            height: 6.25em;
+            width: 6.25em;
+            background: #fff;
+            border-radius: .31em;
+            display: grid;
+            place-items: center;
+            padding: 1.25em 0;
+            box-shadow: 0 0.93em 1.25em rgba(0, 0, 0, 0.3);
+        }
+
+        span {
+            font-size: 1.87em;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: .87em;
+            color: #707070;
+            font-weight: 400;
+        }
+
+
+        /* ============== age cal css ============== */
+    </style>
+</head>
+
+<body>
+
+    <!-- temprature converter html start -->
+    <!-- <form id="tempCalc" onsubmit="calculateTemp(); return false">
+        <label for="temp">Please enter the temprature you'd like to convert</label><br />
+        <input type="number" name="temp" id="temp" placeholder="Type Number">
+
+        <select name="temp_diff" id="temp_diff">
+            <option value="cel">°Celsius</option>
+            <option value="fah">°Fahrenheit</option>
+        </select><br /><br />
+
+        <input type="submit" name="temp">
+        <span id="resultContainer"></span>
+    </form> -->
+    <!-- temprature converter html end -->
+
+    <header>
+        <!-- <h3>Pritam Note</h3> ================== todo list ================= -->
+    </header>
+    <main>
+
+        <!-- <button id="add" class="add">Add New</button>  ================== todo list ================= -->
+        <!-- <div class="note">
+            <div class="operation">
+                <button class="edit">Edit / Save</button>
+                <button class="delete">Delete</button>
+                <div class="main"></div>
+                <textarea></textarea>
+            </div>
+        </div> -->
+
+        <!-- ===================== age cal start =================== -->
+        <div class="container">
+
+            <div class="input-wrapper">
+                <input type="date" id="date-input" />
+                <button id="calc-age-btn">Calculate</button>
+            </div>
+
+            <div class="output-wrapper">
+                <div>
+                    <span id="years">-</span>
+                    <p>Years</p>
+                </div>
+                <div>
+                    <span id="months">-</span>
+                    <p>Months</p>
+                </div>
+                <div>
+                    <span id="days">-</span>
+                    <p>Days</p>
+                </div>
+            </div>
+        </div>
+        <!-- ===================== age cal end =================== -->
+    </main>
+
+    <script>
+
+        "use strict";
+        // =========================== temprature converter Javascript start ===========================
+        // const calculateTemp = () => {
+        //     const numberTemp = document.getElementById('temp').value;
+        //     const tempSelected = document.getElementById('temp_diff');
+        //     const valueTemp = temp_diff.options[tempSelected.selectedIndex].value;
+        //     console.log(numberTemp);
+
+
+        //     const celToFah = (myCels) => {
+        //         let fahrenheit = Math.round((myCels * 9/5) + 32);
+        //         return fahrenheit;
+        //     }
+        //     const fehToCel = (myFerh) => {
+        //         let celsius = Math.round((myFerh - 32) * 5/9);
+        //         return celsius;
+        //     }
+
+
+        //     let result;
+
+        //     if(valueTemp == 'cel'){
+        //         result = celToFah(numberTemp);
+        //         document.getElementById('resultContainer').innerHTML = `= ${result}°Fahrenheit`;
+        //     }else{
+        //          result = fehToCel(numberTemp);
+        //         document.getElementById('resultContainer').innerHTML = `= ${result}°Celsius`;
+        //     }
+
+        // }
+        // =========================== temprature converter Javascript end ===========================
+
+
+        // ====================== Todo list app js start ========================
+        // const addButton = document.querySelector("#add");
+
+        // const updateLSData = () => {
+        //     const textAreaData = document.querySelectorAll('textarea');
+        //     const notes = [];
+        //     // console.log(textAreaData);
+        //     textAreaData.forEach((note) => {
+        //         return notes.push(note.value);
+        //     })
+        //     localStorage.setItem('notes', JSON.stringify(notes));
+        // }
+
+
+
+        // const addNewNote = (text = '') => {
+        //     const note = document.createElement('div');
+        //     note.classList.add('note');
+
+        //     const htmlData = `
+        //     <div class="operation">
+        //         <button class="edit">Edit / Save</button>
+        //         <button class="delete">Delete</button>
+
+        //         <div class="main ${text ? "" : "hidden"}"></div>
+        //         <textarea class="${text ? "hidden" : ""}"></textarea>
+        //     </div>`;
+
+
+        //     note.insertAdjacentHTML('afterbegin', htmlData);
+
+
+
+        //     const editButton = note.querySelector('.edit');
+        //     const delButton = note.querySelector('.delete');
+        //     const mainDiv = note.querySelector('.main');
+        //     const textarea = note.querySelector('textarea');
+
+        //     // deleting the note
+        //     delButton.addEventListener('click', () => {
+        //         note.remove();
+        //         updateLSData();
+        //     });
+
+        //     // toggle using edit button
+        //     textarea.value = text;
+        //     mainDiv.innerHTML = text;
+
+
+        //     editButton.addEventListener('click', () => {
+        //         mainDiv.classList.toggle('hidden');
+        //         textarea.classList.toggle('hidden');
+        //     })
+
+        //     textarea.addEventListener('change', (event) => {
+        //         const value = event.target.value;
+        //         mainDiv.innerHTML = value;
+        //     })
+
+
+        //     document.body.appendChild(note);
+        //     updateLSData();
+
+        // }
+
+        // // getting data back from local storage
+
+        // const notes = JSON.parse(localStorage.getItem('notes'));
+
+        // if(notes){ notes.forEach((note) => addNewNote(note)) };
+
+        // addButton.addEventListener('click', () => addNewNote());
+
+        // ====================== Todo list app js end ========================
+
+
+
+        // =================== age calculator js start ====================
+
+        const ageCalculate = () => {
+            const today = new Date();
+            const inputDate = new Date(document.getElementById('date-input').value);
+
+            // console.log(today);
+
+            const birthDetails = {
+                date: inputDate.getDate(),
+                month: inputDate.getMonth() + 1,
+                year: inputDate.getFullYear(),
+            };
+
+            const currentYear = today.getFullYear();
+            const currentMonth = today.getMonth() + 1;
+            const currentDate = today.getDate();
+
+            if (isFutureDate(birthDetails, currentYear, currentMonth, currentDate)) {
+                alert("Not Born Yet");
+                displayResult("-", "-", "-");
+                return;
+            }
+
+            const { years, months, days } = calculateAge(
+                birthDetails,
+                currentYear,
+                currentMonth,
+                currentDate
+            );
+            displayResult(days, months, years);
+        };
+
+        const isFutureDate = (birthDetails, currentYear, currentMonth, currentDate) => {
+            return (
+                birthDetails.year > currentYear || (birthDetails.year === currentYear && (
+                    birthDetails.month > currentMonth || (
+                        birthDetails.month === currentMonth && birthDetails.date > currentDate
+                    )
+                ))
+            )
+        }
+
+        const calculateAge = (birthDetails, currentYear, currentMonth, currentDate) => {
+            let years = currentYear - birthDetails.year;
+            let months, days;
+
+            if (currentMonth < birthDetails.month) {
+                years--;
+                months = 12 - (birthDetails.month - currentMonth);
+            } else {
+                months = currentMonth - birthDetails.month;
+            }
+
+            if (currentDate < birthDetails.date) {
+                months--;
+                const lastMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+                const daysInLastMonth = getDaysInMonth(lastMonth, currentYear);
+                days = daysInLastMonth - (birthDetails.date - currentDate);
+            } else {
+                days = currentDate - birthDetails.date;
+            }
+            return { years, months, days };
+        }
+
+        const getDaysInMonth = (month, year) => {
+            const isLeapYear = year % 4 === 0 && (year % 100 != 0 || year % 400 === 0);
+            const getDaysInMonth = [
+                31,
+                isLeapYear ? 29 : 28,
+                31,
+                30,
+                31,
+                30,
+                31,
+                31,
+                30,
+                31,
+                30,
+                31,
+            ];
+            return getDaysInMonth[month - 1];
+        }
+
+        const displayResult = (bdate, bMonth, bYear) => {
+            document.getElementById("years").textContent = bYear;
+            document.getElementById("months").textContent = bMonth;
+            document.getElementById("days").textContent = bdate;
+        }
+
+        document.getElementById('calc-age-btn').addEventListener('click', ageCalculate);
+
+// =================== age calculator js end ====================
+
+    </script>
+
+
+</body>
+
+</html>
